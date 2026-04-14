@@ -1,31 +1,25 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request
 import mysql.connector
-from dotenv import load_dotenv
 import os
-
-# Load environment variables
-load_dotenv()
 
 app = Flask(__name__)
 
-# MySQL connection
-try:
-    db = mysql.connector.connect(
-        host=os.getenv("DB_HOST"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_NAME")
+# ✅ Database connection function
+def get_db_connection():
+    return mysql.connector.connect(
+        host=os.getenv("MYSQLHOST"),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQLDATABASE"),
+        port=int(os.getenv("MYSQLPORT"))
     )
-    print("✅ Connected to MySQL successfully")
-except mysql.connector.Error as err:
-    print("❌ Database connection failed:", err)
 
-# Home route (fix for 404)
+# ✅ Home route (form page)
 @app.route('/')
-def home():
-    return "🚀 Server is running successfully!"
+def index():
+    return render_template('index.html')
 
-# Form submit route
+# ✅ Form submit route
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
@@ -34,21 +28,25 @@ def submit():
         phone = request.form.get('phone')
         message = request.form.get('message')
 
-        cursor = db.cursor()
+        # DB connection
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-        query = """
-        INSERT INTO contacts (name, email, phone, message)
-        VALUES (%s, %s, %s, %s)
-        """
+        # Insert query
+        query = "INSERT INTO contacts (name, email, phone, message) VALUES (%s, %s, %s, %s)"
+        values = (name, email, phone, message)
 
-        cursor.execute(query, (name, email, phone, message))
-        db.commit()
+        cursor.execute(query, values)
+        conn.commit()
 
-        return jsonify({"message": "✅ Data Saved Successfully!"})
+        cursor.close()
+        conn.close()
+
+        return "✅ Data submitted successfully!"
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return f"❌ Error: {str(e)}"
 
-# Run server
+# ✅ Run app
 if __name__ == '__main__':
     app.run(debug=True)
