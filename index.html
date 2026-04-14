@@ -368,48 +368,47 @@
         </div>
 
         <aside>
-          <form id="contact-form" onsubmit="submitForm(event)">
-            <div class="input">
-              <i
-                class="fa-solid fa-user"
-                style="width: 26px; text-align: center"
-              ></i
-              ><input placeholder="Full name" required />
-            </div>
-            <div class="input">
-              <i
-                class="fa-solid fa-envelope"
-                style="width: 26px; text-align: center"
-              ></i
-              ><input
-                type="email"
-                placeholder="Email address"
-                id="email"
-                required
-              />
-            </div>
-            <div class="input">
-              <i
-                class="fa-solid fa-phone"
-                style="width: 26px; text-align: center"
-              ></i
-              ><input placeholder="Phone number" id="phone" required />
-            </div>
-            <div class="input">
-              <i
-                class="fa-solid fa-message"
-                style="width: 26px; text-align: center"
-              ></i
-              ><textarea
-                placeholder="Tell us how we can help"
-                id="message"
-              ></textarea>
-            </div>
-            <button class="btn" type="submit">
-              Send Message
-              <i class="fa-solid fa-paper-plane" style="margin-left: 8px"></i>
-            </button>
-          </form>
+          <form action="http://127.0.0.1:5000/submit" method="POST">
+
+              <div class="input">
+                <i class="fa-solid fa-user" style="width: 26px; text-align: center"></i>
+                <input type="text" name="name" placeholder="Full name" required />
+              </div>
+
+              <div class="input">
+                <i class="fa-solid fa-envelope" style="width: 26px; text-align: center"></i>
+                <input 
+                  type="email" 
+                  name="email" 
+                  placeholder="Email address" 
+                  required 
+                />
+              </div>
+
+              <div class="input">
+                <i class="fa-solid fa-phone" style="width: 26px; text-align: center"></i>
+                <input 
+                  type="text" 
+                  name="phone" 
+                  placeholder="Phone number" 
+                  required 
+                />
+              </div>
+
+              <div class="input">
+                <i class="fa-solid fa-message" style="width: 26px; text-align: center"></i>
+                <textarea 
+                  name="message" 
+                  placeholder="Tell us how we can help">
+                </textarea>
+              </div>
+
+              <button class="btn" type="submit">
+                Send Message
+                <i class="fa-solid fa-paper-plane" style="margin-left: 8px"></i>
+              </button>
+
+            </form>
         </aside>
       </section>
 
@@ -446,7 +445,7 @@
             height="420"
             style="border: 0"
             loading="lazy"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d460562.70688242204!2d77.130345!3d23.259933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c4268b7d07b71%3A0x77b4cdbbe3ecb261!2sBhopal%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000"
+            src="https://www.google.com/maps?q=Sironj,%20Madhya%20Pradesh&output=embed"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
