@@ -28,8 +28,8 @@
     />
 
     <!-- Your external CSS -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+   </head>
   <body>
     <header class="nav">
       <div class="container nav-inner">
@@ -368,7 +368,7 @@
         </div>
 
         <aside>
-          <form action="http://127.0.0.1:5000/submit" method="POST">
+          <form action="/submit" method="POST" onsubmit="submitForm(event)">
 
               <div class="input">
                 <i class="fa-solid fa-user" style="width: 26px; text-align: center"></i>
@@ -475,6 +475,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
     <!-- Your external JS -->
-    <script src="index.js"></script>
+   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
   </body>
 </html>
